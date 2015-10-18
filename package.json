@@ -1,0 +1,29 @@
+{
+  "name": "browserify-fastjson",
+  "version": "1.0.0",
+  "description": "Browserify transform to inline JSON files in to the code. This is can dramatically speed up build times with large JSON files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peteward44/browserify-fastjson.git"
+  },
+  "keywords": [
+    "browserify-transform",
+    "browserify"
+  ],
+  "author": {
+    "name": "Pete Ward",
+    "email": "peteward44@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peteward44/browserify-fastjson/issues"
+  },
+  "homepage": "https://github.com/peteward44/browserify-fastjson",
+  "dependencies": {
+    "browserify-transform-tools": "^1.4.2"
+  }
+}
