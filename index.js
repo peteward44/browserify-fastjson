@@ -9,7 +9,7 @@ module.exports = transformTools.makeRequireTransform(
 	"browserify-fastjson",
 	{
 		evaluateArguments: true,
-		jsFilesOnly: false
+		jsFilesOnly: true
 	},
 	function( args, opts, cb ) {
 		var statement = args[0];
