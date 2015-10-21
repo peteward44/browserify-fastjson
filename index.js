@@ -18,7 +18,13 @@ module.exports = transformTools.makeRequireTransform(
 			var fullpath = path.normalize( path.resolve( path.dirname( opts.file ), statement ) );
 			if ( fs.existsSync( fullpath ) ) {
 				var contents = fs.readFileSync( fullpath );
-				replacement = contents;
+				// parse then stringify to remove whitespace
+				try {
+					replacement = JSON.stringify( JSON.parse( contents ) );
+				}
+				catch ( err ) {
+					throw new Error( "Invalid JSON in file '" + fullpath + "'" );
+				}
 			}
 		}
 		return cb( null, replacement );
