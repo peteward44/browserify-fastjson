@@ -5,6 +5,21 @@ var fs = require('fs');
 var path = require( 'path' );
 var transformTools = require( 'browserify-transform-tools' );
 
+
+var commentRegexs = [
+	new RegExp('\/\/[^\r\n]*(\r|\n)+', 'gi'), // end-of-line java style comments, //
+	new RegExp('\\/\\*[\\S\\s]*\\*\\/', 'gi')  // C-style /*...*/ comments
+];
+
+
+function removeComments( contents ) {
+	for ( var index=0; index<commentRegexs.length; ++index ) {
+		contents = contents.replace(commentRegexs[ index ], '');
+	}
+	return contents;
+}
+
+
 module.exports = transformTools.makeRequireTransform(
 	"browserify-fastjson",
 	{
@@ -20,7 +35,8 @@ module.exports = transformTools.makeRequireTransform(
 				var contents = fs.readFileSync( fullpath );
 				// parse then stringify to remove whitespace
 				try {
-					replacement = JSON.stringify( JSON.parse( contents ) );
+					
+					replacement = JSON.stringify( JSON.parse( removeComments( contents ) ) );
 				}
 				catch ( err ) {
 					throw new Error( "Invalid JSON in file '" + fullpath + "'" );
