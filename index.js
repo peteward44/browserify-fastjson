@@ -32,13 +32,14 @@ module.exports = transformTools.makeRequireTransform(
 		if ( path.extname( statement ).toLowerCase() === '.json' ) {
 			var fullpath = path.normalize( path.resolve( path.dirname( opts.file ), statement ) );
 			if ( fs.existsSync( fullpath ) ) {
-				var contents = fs.readFileSync( fullpath );
 				// parse then stringify to remove whitespace
 				try {
-					
-					replacement = JSON.stringify( JSON.parse( removeComments( contents ) ) );
+					var contents = fs.readFileSync( fullpath, 'utf8' );
+					var cleanContents = removeComments( contents.toString() );
+					replacement = JSON.stringify( JSON.parse( cleanContents ) );
 				}
 				catch ( err ) {
+					console.log( err );
 					throw new Error( "Invalid JSON in file '" + fullpath + "'" );
 				}
 			}
