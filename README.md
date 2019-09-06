@@ -1,4 +1,7 @@
 # browserify-fastjson
+
+***This project is no longer maintained***
+
 Browserify transform to inline JSON files in to the code.
 
 Under normal operation, Browserify will embed the JSON as it would a regular js file. All the transforms are executed on it, and in the case of the more complicated transforms
